@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="%PUBLIC_URL%/" />
+    <meta charset="utf-8" />
+    <link rel="icon" href="./images/icons/icon-96x96.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Web site created using create-react-app" />
+    <link rel="apple-touch-icon" href="./images/icons/icon-192x192.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Cortado User Self Service Portal" />
+    <link rel="apple-touch-icon" href="./images/icons/icon-152x152.png" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet" />
+    <link rel="canonical" href="%PUBLIC_URL%" />
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <title>Cortado User Self Service Portal</title>
+  </head>
+  <body class="mdc-typography">
+    <div id="root"></div>
+    <script>
+      let deferredPrompt;
+      window.addEventListener('beforeinstallprompt', event => {
+        event.preventDefault();
+        deferredPrompt = event;
+        document.getElementById('installApp').addEventListener('click', e => {
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then(choiceResult => {
+            if (choiceResult.outcome === 'accepted') {
+            } else {
+              console.log('User dismissed the A2HS prompt');
+            }
+            deferredPrompt = null;
+          });
+        });
+      });
+    </script>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+  </body>
+</html>
